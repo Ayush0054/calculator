@@ -33,7 +33,7 @@ function Keypad({ onClick }: { onClick: (button: string) => void }) {
             onClick(e.currentTarget.value)
           }
         >
-          {button === "*" ? "x" : button === "/" ? "÷" : button}
+          {button}
         </button>
       ))}
     </div>
