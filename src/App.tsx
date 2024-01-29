@@ -5,10 +5,31 @@ import Keypad from "./components/keypad";
 function App() {
   const [result, setResult] = useState("");
 
+  //keyboard logic
   const handleKeyPress = (event: KeyboardEvent) => {
     const key = event.key;
+    //if result have error
+    if (result.includes("error") || result.includes("Infinity")) {
+      if (key === "Backspace") {
+        reset(); // Call reset function if key is Backspace
+      } else if (key === "Escape") {
+        reset(); // Call reset function if key is Escape
+      }
+      return; // Exit the function after handling Backspace or Escape
+    }
+    const operators = ["+", "-", "*", "/"];
+    const lastChar = result.charAt(result.length - 1);
 
-    if (key === "Enter") {
+    if (operators.includes(key)) {
+      if (operators.includes(lastChar)) {
+        if (!(lastChar === "-" && key === "-")) {
+          // Replace the last operator with the new one, unless it's '--'
+          setResult(result.slice(0, -1) + key);
+        }
+      } else {
+        setResult(result + key);
+      }
+    } else if (key === "Enter") {
       calculate();
     } else if (key === "Backspace") {
       backspace();
@@ -31,8 +52,31 @@ function App() {
     return () => document.removeEventListener("keydown", handleKeyPress);
   }, [result]);
 
+  //onclick logic
+
   const onClick = (button: string) => {
-    if (button === "=") {
+    //if result have error
+    if (result.includes("error") || result.includes("Infinity")) {
+      if (button === "CE") {
+        reset(); // Call reset function if key is Backspace
+      } else if (button === "C") {
+        reset(); // Call reset function if key is Escape
+      }
+      return; // Exit the function after handling Backspace or Escape
+    }
+    const operators = ["+", "-", "*", "/"];
+    const lastChar = result.charAt(result.length - 1);
+
+    if (operators.includes(button)) {
+      if (operators.includes(lastChar)) {
+        if (!(lastChar === "-" && button === "-")) {
+          // Replace the last operator with the new one, unless it's '--'
+          setResult(result.slice(0, -1) + button);
+        }
+      } else {
+        setResult(result + button);
+      }
+    } else if (button === "=") {
       calculate();
     } else if (button === "C") {
       reset();
@@ -71,6 +115,7 @@ function App() {
             {result || "0"}
           </h1>
         </div>
+
         <Keypad onClick={onClick} />
       </div>
     </div>
