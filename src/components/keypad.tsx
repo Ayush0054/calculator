@@ -27,7 +27,7 @@ function Keypad({ onClick }: { onClick: (button: string) => void }) {
       {buttons.map((button) => (
         <button
           key={button}
-          className=" font-semibold  bg-white shadow-lg hover:drop-shadow-lg hover:bg-green-50 rounded-md md:rounded-lg text-4xl p-4 text-black"
+          className=" focus:outline-none font-semibold  bg-white shadow-lg hover:drop-shadow-lg hover:bg-green-50 rounded-md md:rounded-lg text-4xl p-4 text-black"
           value={button}
           onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
             onClick(e.currentTarget.value)
