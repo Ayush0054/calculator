@@ -14,8 +14,9 @@ function App() {
         reset(); // Call reset function if key is Backspace
       } else if (key === "Escape") {
         reset(); // Call reset function if key is Escape
-      }
-      return; // Exit the function after handling Backspace or Escape
+      } else {
+        return setResult(key); // Exit the function after handling Backspace or Escape
+      } // Exit the function after handling Backspace or Escape
     }
     const operators = ["+", "-", "*", "/"];
     const lastChar = result.charAt(result.length - 1);
@@ -61,8 +62,9 @@ function App() {
         reset(); // Call reset function if key is Backspace
       } else if (button === "C") {
         reset(); // Call reset function if key is Escape
+      } else {
+        return setResult(button); // Exit the function after handling Backspace or Escape
       }
-      return; // Exit the function after handling Backspace or Escape
     }
     const operators = ["+", "-", "*", "/"];
     const lastChar = result.charAt(result.length - 1);
